@@ -34,7 +34,7 @@ export function SiteFooter() {
 
               {/* ✅ WhatsApp Link */}
               <Link
-                href="https://wa.me/447000000000" // Replace with your WhatsApp number in international format
+                href="wa.me/447594166687" // Replace with your WhatsApp number in international format
                 target="_blank"
                 className="hover:opacity-70 transition-opacity"
                 aria-label="WhatsApp"
@@ -42,14 +42,6 @@ export function SiteFooter() {
                 <SiWhatsapp className="w-5 h-5 text-green-600" />
               </Link>
 
-              <Link
-                href="https://twitter.com"
-                target="_blank"
-                className="hover:opacity-70 transition-opacity"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </Link>
             </div>
           </div>
 
