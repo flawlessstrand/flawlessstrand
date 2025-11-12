@@ -41,14 +41,7 @@ export function SiteFooter() {
               >
                 <SiWhatsapp className="w-5 h-5 text-green-600" />
               </Link>
-              <Link
-                href="https://facebook.com"
-                target="_blank"
-                className="hover:opacity-70 transition-opacity"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </Link>
+
               <Link
                 href="https://twitter.com"
                 target="_blank"
