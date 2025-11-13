@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { ArrowRight } from "lucide-react";
 import { getCollections, getProducts } from "@/lib/shopify";
 import { ProductCard } from "@/components/product-card";
+import { HeroSlider } from "@/components/hero-slider"
+
 
 export default async function HomePage() {
   const collections = await getCollections();
@@ -17,17 +19,7 @@ export default async function HomePage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden min-h-[400px] md:min-h-[500px]">
-          {/* Background Video */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/hero.mp4" type="video/mp4" />
-          </video>
-
+          <HeroSlider />
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black/40" />
 
@@ -85,7 +77,7 @@ export default async function HomePage() {
               {/* Large featured image */}
               <div className="col-span-2 row-span-2 relative overflow-hidden rounded-lg group cursor-pointer">
                 <img
-                  src="model1.jpg"
+                  src="replacement.jpg"
                   alt="Featured hair style showcase"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
