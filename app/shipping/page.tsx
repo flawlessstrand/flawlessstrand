@@ -30,7 +30,7 @@ export default function ShippingPage() {
                 </div>
                 <h3 className="font-semibold">Worldwide Shipping</h3>
                 <p className="text-sm text-muted-foreground">
-                  We ship to over 100 countries
+                  We deliver across the uk 
                 </p>
               </CardContent>
             </Card>
@@ -81,11 +81,8 @@ export default function ShippingPage() {
                 vary by location:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>United States: 3-7 business days</li>
-                <li>Canada: 5-10 business days</li>
+                <li>Within the UK: 1–3 business days</li>
                 <li>Europe: 7-14 business days</li>
-                <li>Australia & New Zealand: 10-15 business days</li>
-                <li>Rest of World: 10-20 business days</li>
               </ul>
             </section>
 
@@ -94,9 +91,7 @@ export default function ShippingPage() {
                 Shipment Confirmation & Order Tracking
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                You will receive a shipment confirmation email once your order
-                has shipped containing your tracking number. The tracking number
-                will be active within 24 hours of receiving the email.
+                Please Note: Delivery times may vary depending on your location. Once your order is shipped, you’ll receive a tracking number to follow your package every step of the way.
               </p>
             </section>
 
@@ -105,27 +100,21 @@ export default function ShippingPage() {
                 Customs, Duties, and Taxes
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                flawless_strands is not responsible for any customs and taxes
-                applied to your order. All fees imposed during or after shipping
-                are the responsibility of the customer (tariffs, taxes, etc.).
+                Please note that Flawless Strands is not responsible for any customs fees, duties, or taxes that may apply to your order. Any charges incurred during or after shipping are the responsibility of the customer
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold mb-4">Damages</h2>
               <p className="text-muted-foreground leading-relaxed">
-                flawless_strands is not liable for any products damaged or lost
-                during shipping. If you received your order damaged, please
-                contact the shipment carrier to file a claim. Please save all
-                packaging materials and damaged goods before filing a claim.
+                Flawless Strands cannot be held liable for products that are damaged or lost in transit. If your order arrives damaged, please contact the shipping carrier to file a claim. Make sure to keep all packaging materials and damaged items until the claim is resolved.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+              <h2 className="text-2xl font-semibold mb-4">Need Help?</h2>
               <p className="text-muted-foreground leading-relaxed">
-                If you have any questions about shipping, please contact us at
-                shipping@flawless_strands.com or through our contact page.
+                If you have any questions about shipping or your order, feel free to reach out to us at flawlessstrands2025@gmail.com or via our contact page. Our team is happy to assist!
               </p>
             </section>
           </div>

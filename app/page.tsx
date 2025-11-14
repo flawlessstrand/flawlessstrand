@@ -30,9 +30,8 @@ export default async function HomePage() {
                   Unveil Your Signature Look with Our Premium Hair Wigs
                 </h1>
                 <p className="text-xs md:text-base text-white/90 leading-relaxed text-pretty max-w-xl drop-shadow-md">
-                  Experience a handcrafted collection of sleek, healthy wigs
-                  that offer unmatched quality. From lace closures to full
-                  bundles, find your perfect match.
+                  Flawless Hair. Effortless Style.
+Soft, bouncy, and tangle-free braiding hair extensions designed to let your confidence shine.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
@@ -67,8 +66,7 @@ export default async function HomePage() {
                 Seller Recommended
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Our top picks curated just for you. Premium quality hair
-                products trusted by thousands.
+                Our top picks, just for you. Premium, tangle-free braiding hair extensions loved by hair lovers everywhere.
               </p>
             </div>
 
@@ -141,14 +139,7 @@ export default async function HomePage() {
                   Get your Hair
                 </h2>
                 <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
-                  flawless_strands grows to be one of the biggest 100% human
-                  hair products manufacturing and selling company in United
-                  States. Best quality control. Exquisite hand-tied skill makes
-                  flawless_strands to be one of the biggest 100% human hair
-                  products manufacturing and selling company in United States.
-                  Best quality control. Exquisite hand-tied skill makes
-                  flawless_strands grows to be one of the biggest 100% human
-                  hair products manufacturing and selling company in United
+                  Your perfect hair awaits! Explore our range of soft, lightweight, and tangle-free braiding extensions designed to bring bounce, shine, and effortless style to every look. Whether you’re creating everyday braids, bold protective styles, or statement twists, our collection makes styling simple, fun, and flawless. Find the hair that inspires your confidence and completes your signature style.
                   States.
                 </p>
                 <Button
@@ -179,8 +170,8 @@ export default async function HomePage() {
                 Our Collections
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Discover our curated collections, each designed to complement
-                your unique style and personality.
+                Discover Our collection 
+Each piece is designed to complement your unique style and let your confidence shine.
               </p>
             </div>
 

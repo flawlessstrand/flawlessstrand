@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "Your Brand Name",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/header.png",
         width: 1200,
         height: 630,
         alt: "Luxury Human Hair Vendor UK",
@@ -54,13 +54,13 @@ export const metadata: Metadata = {
     title: "Luxury Human Hair Vendor UK | 100% Virgin Hair Extensions",
     description:
       "Trusted UK hair vendor offering virgin human hair bundles, wigs, and HD frontals. Fast shipping, amazing quality.",
-    images: ["/og-image.jpg"],
+    images: ["/headerblack.png"],
     creator: "flawlessstrand",
   },
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/headerblack.png',
         media: '(prefers-color-scheme: light)',
       },
       {
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: '/headerblack.png',
         type: 'image/svg+xml',
       },
     ],

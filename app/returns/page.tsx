@@ -1,13 +1,13 @@
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Breadcrumb } from "@/components/breadcrumb";
-import { RefreshCw, CheckCircle, XCircle } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { RefreshCw, CheckCircle, AlertCircle } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
 
 export const metadata = {
-  title: "Returns & Exchanges | flawless_strands",
-  description: "Learn about our return and exchange policy",
-};
+  title: "Return & Exchange Policy | LuxeHair",
+  description: "Learn about our return and exchange policy for Flawless Strands",
+}
 
 export default function ReturnsPage() {
   return (
@@ -15,171 +15,91 @@ export default function ReturnsPage() {
       <SiteHeader />
 
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-12 max-w-4xl">
+        <div className="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
           <Breadcrumb />
 
-          <h1 className="text-4xl font-serif font-bold mb-8">
-            Returns & Exchanges
-          </h1>
+          <h1 className="text-3xl md:text-4xl font-serif font-bold mb-6 md:mb-8">Return & Exchange Policy</h1>
 
-          <Card className="mb-12 bg-[#fee1e3]/30 border-none">
+          <Card className="mb-8 md:mb-12 bg-[#fee1e3]/30 border-none">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#2a1a1f] flex items-center justify-center flex-shrink-0">
                   <RefreshCw className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">
-                    30-Day Return Policy
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We want you to be completely satisfied with your purchase.
-                    If you're not happy with your order, you can return it
-                    within 30 days of delivery for a full refund or exchange.
+                  <h3 className="font-semibold text-lg mb-2">We Want You To Love Your Purchase</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                    We want you to love your purchase from Flawless Strands. For hygiene and safety reasons, we do not accept returns or exchanges on hair products once the packaging has been opened.
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <div className="prose prose-sm max-w-none space-y-6">
+          <div className="prose prose-sm max-w-none space-y-6 md:space-y-8">
             <section>
-              <h2 className="text-2xl font-semibold mb-4">
-                Return Eligibility
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                To be eligible for a return, your item must meet the following
-                conditions:
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Unopened Items</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                If your item is still in its original, unopened packaging, you may request a return or exchange within 14 days of receiving your order. The item must be unused and in its original condition.
               </p>
+            </section>
 
-              <div className="space-y-3">
+            <section>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Incorrect or Faulty Items</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4">
+                If you receive the wrong item or a product that appears faulty, please contact us within 48 hours of delivery. Our team will be happy to assist and arrange a suitable solution.
+              </p>
+              <div className="flex items-start gap-3 bg-amber-50 p-4 rounded-lg border border-amber-200">
+                <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <p className="text-amber-900 text-sm">
+                  <strong>Important:</strong> Contact us within 48 hours of delivery for incorrect or faulty items.
+                </p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Return Shipping</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                Customers are responsible for return shipping costs unless the return is due to an error on our end.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">How to Request a Return</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4">
+                Contact us at <a href="mailto:flawlessstrands2025@gmail.com" className="text-[#c19a6b] hover:underline font-medium">flawlessstrands2025@gmail.com</a> or via our <a href="/contact" className="text-[#c19a6b] hover:underline font-medium">contact page</a> with your order number and details of your request. Our team will guide you through the process.
+              </p>
+              
+              <div className="space-y-3 mt-4">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Item must be unused and in the same condition that you
-                    received it
+                  <p className="text-muted-foreground text-sm md:text-base">
+                    Include your order number in your email
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Item must be in the original packaging
+                  <p className="text-muted-foreground text-sm md:text-base">
+                    Provide details about your return or exchange request
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Return must be initiated within 30 days of delivery
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    You must provide proof of purchase
+                  <p className="text-muted-foreground text-sm md:text-base">
+                    Our team will respond and guide you through the process
                   </p>
                 </div>
               </div>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">
-                Non-Returnable Items
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                The following items cannot be returned:
-              </p>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <XCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Items that have been worn, washed, or altered
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <XCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Items without original packaging or tags
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <XCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Custom or personalized items
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <XCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">
-                    Sale or clearance items
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">
-                How to Return an Item
-              </h2>
-              <ol className="list-decimal list-inside space-y-3 text-muted-foreground">
-                <li>
-                  Contact our customer service team at
-                  returns@flawless_strands.com with your order number
-                </li>
-                <li>
-                  We will provide you with a return authorization number and
-                  shipping instructions
-                </li>
-                <li>Pack the item securely in its original packaging</li>
-                <li>
-                  Ship the item to the address provided (you are responsible for
-                  return shipping costs)
-                </li>
-                <li>
-                  Once we receive and inspect your return, we will process your
-                  refund
-                </li>
-              </ol>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Refunds</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Once your return is received and inspected, we will send you an
-                email to notify you that we have received your returned item. We
-                will also notify you of the approval or rejection of your
-                refund. If approved, your refund will be processed within 5-10
-                business days and a credit will automatically be applied to your
-                original method of payment.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Exchanges</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                We only replace items if they are defective or damaged. If you
-                need to exchange an item for the same product, contact us at
-                exchanges@flawless_strands.com with your order number and
-                details about the issue.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Shipping Costs</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                You will be responsible for paying for your own shipping costs
-                for returning your item. Shipping costs are non-refundable. If
-                you receive a refund, the cost of return shipping will be
-                deducted from your refund.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Questions?</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                If you have any questions about our return policy, please
-                contact us at support@flawless_strands.com or through our
-                contact page.
+            <section className="bg-[#fee1e3]/20 p-6 rounded-lg border border-[#fee1e3]">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Questions?</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                If you have any questions about our return policy, please don't hesitate to contact us at{" "}
+                <a href="mailto:flawlessstrands2025@gmail.com" className="text-[#c19a6b] hover:underline font-medium">
+                  flawlessstrands2025@gmail.com
+                </a>{" "}
+                or through our <a href="/contact" className="text-[#c19a6b] hover:underline font-medium">contact page</a>.
               </p>
             </section>
           </div>
@@ -188,5 +108,5 @@ export default function ReturnsPage() {
 
       <SiteFooter />
     </div>
-  );
+  )
 }

@@ -122,7 +122,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">9. Contact Us</h2>
               <p className="text-muted-foreground leading-relaxed">
                 If you have any questions about this Privacy Policy, please
-                contact us at privacy@flawless_strands.com or through our
+                contact us at flawlessstrands2025@gmail.com or through our
                 contact page.
               </p>
             </section>

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ShoppingBag, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import Image from "next/image";
+
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,12 +13,17 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-serif font-bold text-foreground">
-            flawless_strands
-          </span>
-        </Link>
+{/* Logo */}
+<Link href="/" className="flex items-center space-x-2">
+  <Image
+    src="/header.png"
+    alt="flawless strands logo"
+    width={120}
+    height={40}
+    className="object-contain"
+    priority
+  />
+</Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">

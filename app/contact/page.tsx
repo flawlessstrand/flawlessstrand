@@ -22,8 +22,7 @@ export default function ContactPage() {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-serif font-bold mb-4">Contact Us</h1>
             <p className="text-muted-foreground leading-relaxed">
-              Have a question? We'd love to hear from you. Send us a message and
-              we'll respond as soon as possible.
+              Have a question or need assistance? We’d love to hear from you! Send us a message, and our team will get back to you as quickly as possible.e.
             </p>
           </div>
 
@@ -35,7 +34,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="font-semibold">Email Us</h3>
                 <p className="text-sm text-muted-foreground">
-                  support@flawless_strands.com
+                  Flawlessstrands2025@gmail.com
                 </p>
               </CardContent>
             </Card>
@@ -47,7 +46,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="font-semibold">Call Us</h3>
                 <p className="text-sm text-muted-foreground">
-                  +1 (555) 123-4567
+                  +44 07594166687
                 </p>
               </CardContent>
             </Card>
@@ -59,7 +58,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="font-semibold">Visit Us</h3>
                 <p className="text-sm text-muted-foreground">
-                  123 Beauty Lane, NY 10001
+                  Shop our full collection online anytime, anywhere—your perfect braiding hair is just a click away.
                 </p>
               </CardContent>
             </Card>

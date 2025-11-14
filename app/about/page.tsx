@@ -22,10 +22,10 @@ export default function AboutPage() {
 
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#2a1a1f] mb-6 text-balance">
-                About flawless_strands
+                About Flawless Strands
               </h1>
               <p className="text-lg text-[#2a1a1f]/80 max-w-2xl mx-auto leading-relaxed">
-                Empowering women with premium quality hair products since 2020
+                Our journey began with a simple love for braids and a personal struggle: finding high-quality, ethically sourced hair products that truly met our standards. Frustrated by the limited options, our founder decided to create Flawless Strands—a brand that sets a new standard in the industry.
               </p>
             </div>
           </div>
@@ -44,13 +44,7 @@ export default function AboutPage() {
                 to helping you achieve the look you've always wanted.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Our journey began when our founder struggled to find
-                high-quality, ethically sourced hair products that met her
-                standards. Frustrated by the lack of options, she decided to
-                create a brand that would set a new standard in the industry.
-                Today, flawless_strands is trusted by thousands of women
-                worldwide who value quality, authenticity, and exceptional
-                customer service.
+                Our journey began with a simple love for braids and a personal struggle: finding high-quality, ethically sourced hair products that truly met our standards. Frustrated by the limited options, our founder decided to create Flawless Strands—a brand that sets a new standard in the industry.
               </p>
             </div>
           </div>
@@ -71,8 +65,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-semibold">Quality First</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    We source only the finest 100% virgin human hair, ensuring
-                    every product meets our rigorous quality standards.
+                    We provide soft, tangle-free braiding hair extensions that meet the highest standards, ensuring every style looks and feels flawless.
                   </p>
                 </CardContent>
               </Card>
@@ -84,8 +77,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-semibold">Ethical Sourcing</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    We're committed to ethical practices, ensuring our hair is
-                    sourced responsibly and our suppliers are treated fairly.
+                    We are committed to sourcing our products responsibly, so you can enjoy beautiful hair with a clear conscience.
                   </p>
                 </CardContent>
               </Card>
@@ -97,8 +89,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-semibold">Customer Care</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Your satisfaction is our priority. We provide exceptional
-                    support and stand behind every product we sell.
+                    Your satisfaction is our priority—our team is here to support you every step of the way, making your experience seamless and enjoyable.
                   </p>
                 </CardContent>
               </Card>
@@ -114,27 +105,19 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                At flawless_strands, we believe that every woman deserves to
-                feel beautiful and confident. That's why we're committed to
-                providing not just products, but an experience that exceeds your
-                expectations.
+                At Flawless Strands, we believe every woman deserves to feel confident, beautiful, and empowered. That’s why we are dedicated to delivering more than just hair extensions—we provide an experience designed to inspire and delight.
               </p>
               <p>
-                We continuously invest in research and development to bring you
-                the latest innovations in hair technology. Our team of experts
-                carefully selects and tests every product to ensure it meets our
-                high standards for quality, durability, and natural appearance.
+              We carefully craft and select each product to meet our high standards for softness, bounce, and natural movement, ensuring every style looks flawless. Our team continuously strives to bring the latest in quality and innovation, so you can enjoy hair that’s as versatile and unique as you are
               </p>
               <p>
-                Thank you for choosing flawless_strands. We're honored to be
-                part of your beauty journey and look forward to serving you for
-                years to come.
+                Thank you for choosing Flawless Strands. We’re proud to be part of your hair journey and are committed to supporting you every step of the way.
               </p>
             </div>
           </div>
         </section>
       </main>
-
+    
       <SiteFooter />
     </div>
   );

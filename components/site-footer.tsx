@@ -72,6 +72,12 @@ export function SiteFooter() {
               >
                 shipping & returns
               </Link>
+                <Link href="/hair-care" className="text-sm text-foreground hover:underline">
+                hair care guide
+              </Link>
+              <Link href="/returns" className="text-sm text-foreground hover:underline">
+                return & exchange
+              </Link>
             </div>
           </div>
 
