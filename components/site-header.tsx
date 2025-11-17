@@ -39,12 +39,12 @@ export function SiteHeader() {
           >
             Shop
           </Link>
-          <Link
+          {/* <Link
             href="/collections"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             Collections
-          </Link>
+          </Link> */}
           <Link
             href="/about"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"

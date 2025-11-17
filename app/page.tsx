@@ -46,7 +46,7 @@ export default async function HomePage() {
                     asChild
                     className="border-white text-white hover:bg-white/10 bg-transparent"
                   >
-                    <Link href="/collections">Our Work</Link>
+                    {/* <Link href="/collections">Our Work</Link> */}
                   </Button>
                 </div>
               </div>
@@ -246,26 +246,35 @@ Each piece is designed to complement your unique style and let your confidence s
           </div>
         </section>
 
-        {/* CTA Section */}
+       {/* CTA Section */}
         <section className="py-12" style={{ backgroundColor: "#faf8f7" }}>
-          <div className="container mx-auto px-4 text-center space-y-4">
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-balance">
-              Ready to Transform Your Look?
-            </h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Join thousands of satisfied customers who trust flawless_strands
-              for their hair needs.
-            </p>
-            <Button
-              size="lg"
-              asChild
-              className="bg-[#2a1a1f] hover:bg-[#2a1a1f]/90"
-            >
-              <Link href="/shop">
-                Start Shopping
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto space-y-6">
+              {/* Image on top */}
+              <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+                <img
+                  src="/ctapic.jpg"
+                  alt="Transform your look with our premium hair"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Content below */}
+              <div className="text-center space-y-4">
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-balance">Ready to Transform Your Look?</h2>
+                <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  Join thousands of satisfied customers who trust LuxeHair for their hair needs.
+                </p>
+                <div className="flex justify-center">
+                  <Button size="lg" asChild className="bg-[#2a1a1f] hover:bg-[#2a1a1f]/90">
+                    <Link href="/shop">
+                      Start Shopping
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

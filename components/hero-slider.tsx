@@ -9,11 +9,6 @@ const slides = [
     alt: "Beautiful model with luxury straight hair wig",
   },
   {
-    id: 2,
-    image: "/heroslide2.jpg",
-    alt: "Elegant model with body wave hair",
-  },
-  {
     id: 3,
     image: "/heroslide3.jpg",
     alt: "Gorgeous model with curly hair extensions",
@@ -25,7 +20,7 @@ const slides = [
   },
   {
     id: 5,
-    image: "/heroslide5.jpg",
+    image: "/heroslide6.jpg",
     alt: "Gorgeous model with curly hair extensions",
   },
 ]
