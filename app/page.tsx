@@ -3,14 +3,14 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ArrowRight } from "lucide-react";
-import { getCollections, getProducts } from "@/lib/shopify";
+import {  getProducts } from "@/lib/shopify";
 import { ProductCard } from "@/components/product-card";
 import { HeroSlider } from "@/components/hero-slider"
 
 
 export default async function HomePage() {
-  const collections = await getCollections();
-  const products = await getProducts({ first: 4 });
+  const products = await getProducts({ first: 8, query: 'tag:featured' })
+  const allProducts = await getProducts({ first: 8 })
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -27,11 +27,10 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
               <div className="space-y-4 text-left">
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold text-white text-balance leading-snug md:leading-tight drop-shadow-lg">
-                  Unveil Your Signature Look with Our Premium Hair Wigs
+                  Flawless Hair. Effortless Style
                 </h1>
                 <p className="text-xs md:text-base text-white/90 leading-relaxed text-pretty max-w-xl drop-shadow-md">
-                  Flawless Hair. Effortless Style.
-Soft, bouncy, and tangle-free braiding hair extensions designed to let your confidence shine.
+                  Soft, bouncy, and tangle-free braiding hair extensions designed to let your confidence shine.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
@@ -163,7 +162,7 @@ Soft, bouncy, and tangle-free braiding hair extensions designed to let your conf
         </section>
 
         {/* Collections Preview */}
-        <section className="py-8 bg-muted/30">
+        {/* <section className="py-8 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center space-y-2 mb-6">
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-balance">
@@ -211,7 +210,7 @@ Each piece is designed to complement your unique style and let your confidence s
               </Button>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Featured Products */}
         <section className="py-8 bg-background">

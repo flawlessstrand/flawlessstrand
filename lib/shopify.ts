@@ -4,366 +4,12 @@ const SHOPIFY_STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_ACCESS_TO
 
 const SHOPIFY_GRAPHQL_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`
 
-const FALLBACK_COLLECTIONS = [
-  {
-    id: "fallback-1",
-    handle: "closures",
-    title: "Closures",
-    description: "Premium lace closures for a natural hairline",
-    image: {
-      url: "/hair-closure-piece.jpg",
-      altText: "Hair Closures Collection",
-    },
-  },
-  {
-    id: "fallback-2",
-    handle: "frontals",
-    title: "Frontals",
-    description: "Full lace frontals for versatile styling",
-    image: {
-      url: "/hair-frontal-piece.jpg",
-      altText: "Hair Frontals Collection",
-    },
-  },
-  {
-    id: "fallback-3",
-    handle: "bundles",
-    title: "Bundles",
-    description: "Premium hair bundles in various textures",
-    image: {
-      url: "/hair-bundles.png",
-      altText: "Hair Bundles Collection",
-    },
-  },
-  {
-    id: "fallback-4",
-    handle: "wigs",
-    title: "Wigs",
-    description: "Ready-to-wear luxury wigs",
-    image: {
-      url: "/luxury-wig.jpg",
-      altText: "Wigs Collection",
-    },
-  },
-]
-
-const FALLBACK_PRODUCTS = [
-  {
-    id: "fallback-product-1",
-    handle: "straight-bundle-set",
-    title: "Straight Bundle Set",
-    description: "Premium straight hair bundles - 3 piece set",
-    priceRange: {
-      minVariantPrice: {
-        amount: "189.99",
-        currencyCode: "USD",
-      },
-    },
-    images: {
-      edges: [
-        {
-          node: {
-            url: "/straight-hair-bundles.jpg",
-            altText: "Straight Bundle Set",
-          },
-        },
-      ],
-    },
-    variants: {
-      edges: [
-        {
-          node: {
-            id: "variant-1",
-            availableForSale: true,
-          },
-        },
-      ],
-    },
-  },
-  {
-    id: "fallback-product-2",
-    handle: "body-wave-bundle",
-    title: "Body Wave Bundle",
-    description: "Luxurious body wave texture - 3 piece set",
-    priceRange: {
-      minVariantPrice: {
-        amount: "199.99",
-        currencyCode: "USD",
-      },
-    },
-    images: {
-      edges: [
-        {
-          node: {
-            url: "/body-wave-hair-bundles.jpg",
-            altText: "Body Wave Bundle",
-          },
-        },
-      ],
-    },
-    variants: {
-      edges: [
-        {
-          node: {
-            id: "variant-2",
-            availableForSale: true,
-          },
-        },
-      ],
-    },
-  },
-  {
-    id: "fallback-product-3",
-    handle: "deep-wave-bundle",
-    title: "Deep Wave Bundle",
-    description: "Beautiful deep wave pattern - 3 piece set",
-    priceRange: {
-      minVariantPrice: {
-        amount: "209.99",
-        currencyCode: "USD",
-      },
-    },
-    images: {
-      edges: [
-        {
-          node: {
-            url: "/deep-wave-hair-bundles.png",
-            altText: "Deep Wave Bundle",
-          },
-        },
-      ],
-    },
-    variants: {
-      edges: [
-        {
-          node: {
-            id: "variant-3",
-            availableForSale: true,
-          },
-        },
-      ],
-    },
-  },
-  {
-    id: "fallback-product-4",
-    handle: "curly-bundle-set",
-    title: "Curly Bundle Set",
-    description: "Tight curly texture - 3 piece set",
-    priceRange: {
-      minVariantPrice: {
-        amount: "219.99",
-        currencyCode: "USD",
-      },
-    },
-    images: {
-      edges: [
-        {
-          node: {
-            url: "/curly-hair-bundles.jpg",
-            altText: "Curly Bundle Set",
-          },
-        },
-      ],
-    },
-    variants: {
-      edges: [
-        {
-          node: {
-            id: "variant-4",
-            availableForSale: true,
-          },
-        },
-      ],
-    },
-  },
-]
-
-export async function shopifyFetch<T>({
-  query,
-  variables = {},
-}: {
-  query: string
-  variables?: Record<string, unknown>
-}): Promise<T> {
-  try {
-    const result = await fetch(SHOPIFY_GRAPHQL_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-      },
-      body: JSON.stringify({ query, variables }),
-      next: { revalidate: 3600 }, // Cache for 1 hour
-    })
-
-    if (!result.ok) {
-      throw new Error(`Shopify API error: ${result.statusText}`)
-    }
-
-    const json = await result.json()
-
-    if (json.errors) {
-      throw new Error(json.errors[0].message)
-    }
-
-    return json.data
-  } catch (error) {
-    console.error("[v0] Shopify fetch error:", error)
-    throw error
-  }
-}
-
-// Get all collections
-export async function getCollections() {
-  if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
-    console.log("[v0] Using fallback collections - Shopify not configured")
-    return FALLBACK_COLLECTIONS
-  }
-
-  const query = `
-    query GetCollections {
-      collections(first: 10) {
-        edges {
-          node {
-            id
-            title
-            handle
-            description
-            image {
-              url
-              altText
-            }
-          }
-        }
-      }
-    }
-  `
-
-  try {
-    const data = await shopifyFetch<{
-      collections: {
-        edges: Array<{
-          node: {
-            id: string
-            title: string
-            handle: string
-            description: string
-            image: { url: string; altText: string } | null
-          }
-        }>
-      }
-    }>({ query })
-
-    return data.collections.edges.map((edge) => edge.node)
-  } catch (error) {
-    console.error("[v0] Error fetching collections:", error)
-    return FALLBACK_COLLECTIONS
-  }
-}
-
-// Get products by collection
-export async function getProductsByCollection(handle: string) {
-  const query = `
-    query GetProductsByCollection($handle: String!) {
-      collection(handle: $handle) {
-        title
-        products(first: 20) {
-          edges {
-            node {
-              id
-              title
-              handle
-              description
-              priceRange {
-                minVariantPrice {
-                  amount
-                  currencyCode
-                }
-              }
-              images(first: 1) {
-                edges {
-                  node {
-                    url
-                    altText
-                  }
-                }
-              }
-              variants(first: 10) {
-                edges {
-                  node {
-                    id
-                    title
-                    availableForSale
-                    selectedOptions {
-                      name
-                      value
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `
-
-  try {
-    const data = await shopifyFetch<{
-      collection: {
-        title: string
-        products: {
-          edges: Array<{
-            node: {
-              id: string
-              title: string
-              handle: string
-              description: string
-              priceRange: {
-                minVariantPrice: {
-                  amount: string
-                  currencyCode: string
-                }
-              }
-              images: {
-                edges: Array<{
-                  node: {
-                    url: string
-                    altText: string
-                  }
-                }>
-              }
-              variants: {
-                edges: Array<{
-                  node: {
-                    id: string
-                    title: string
-                    availableForSale: boolean
-                    selectedOptions: Array<{
-                      name: string
-                      value: string
-                    }>
-                  }
-                }>
-              }
-            }
-          }>
-        }
-      }
-    }>({ query, variables: { handle } })
-
-    return {
-      title: data.collection.title,
-      products: data.collection.products.edges.map((edge) => edge.node),
-    }
-  } catch (error) {
-    console.error("[v0] Error fetching products by collection:", error)
-    return { title: "", products: [] }
-  }
-}
+import { shopifyFetch } from "./shopify/client"
 
 // Get single product by handle
 export async function getProduct(handle: string) {
+  console.log("[v0] Getting product with handle:", handle)
+  
   const query = `
     query GetProduct($handle: String!) {
       product(handle: $handle) {
@@ -372,6 +18,8 @@ export async function getProduct(handle: string) {
         handle
         description
         descriptionHtml
+        productType
+        tags
         priceRange {
           minVariantPrice {
             amount
@@ -396,6 +44,10 @@ export async function getProduct(handle: string) {
                 amount
                 currencyCode
               }
+              compareAtPriceV2 {
+                amount
+                currencyCode
+              }
               selectedOptions {
                 name
                 value
@@ -407,11 +59,16 @@ export async function getProduct(handle: string) {
             }
           }
         }
+        options {
+          name
+          values
+        }
       }
     }
   `
 
   try {
+    console.log("[v0] Fetching product from Shopify API...")
     const data = await shopifyFetch<{
       product: {
         id: string
@@ -419,6 +76,8 @@ export async function getProduct(handle: string) {
         handle: string
         description: string
         descriptionHtml: string
+        productType: string
+        tags: string[]
         priceRange: {
           minVariantPrice: {
             amount: string
@@ -443,6 +102,10 @@ export async function getProduct(handle: string) {
                 amount: string
                 currencyCode: string
               }
+              compareAtPriceV2?: {
+                amount: string
+                currencyCode: string
+              }
               selectedOptions: Array<{
                 name: string
                 value: string
@@ -454,35 +117,52 @@ export async function getProduct(handle: string) {
             }
           }>
         }
-      }
+        options: Array<{
+          name: string
+          values: string[]
+        }>
+      } | null
     }>({ query, variables: { handle } })
 
-    return data.product
+    if (!data.product) {
+      console.error(`[v0] Product not found in Shopify with handle: "${handle}". Make sure the product exists in your Shopify store.`)
+      return null
+    }
+
+    console.log("[v0] Product found:", data.product.title)
+    console.log("[v0] Product images count:", data.product.images.edges.length)
+    console.log("[v0] Product variants count:", data.product.variants.edges.length)
+    
+    // Transform the data to match component expectations
+    return {
+      id: data.product.id,
+      title: data.product.title,
+      handle: data.product.handle,
+      description: data.product.description,
+      descriptionHtml: data.product.descriptionHtml,
+      productType: data.product.productType,
+      tags: data.product.tags,
+      priceRange: data.product.priceRange,
+      images: data.product.images.edges.map(edge => edge.node),
+      variants: data.product.variants.edges.map(edge => ({
+        id: edge.node.id,
+        title: edge.node.title,
+        availableForSale: edge.node.availableForSale,
+        price: edge.node.priceV2,
+        compareAtPrice: edge.node.compareAtPriceV2 || null,
+        selectedOptions: edge.node.selectedOptions,
+        image: edge.node.image
+      })),
+      options: data.product.options
+    }
   } catch (error) {
     console.error("[v0] Error fetching product:", error)
     return null
   }
 }
 
-// Helper to extract Shopify product ID from global ID
-export function getShopifyProductId(globalId: string): string {
-  return globalId.split("/").pop() || ""
-}
-
-// Format price
-export function formatPrice(amount: string, currencyCode: string): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currencyCode,
-  }).format(Number.parseFloat(amount))
-}
-
+// Get all products
 export async function getProducts({ first = 20, query }: { first?: number; query?: string } = {}) {
-  if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
-    console.log("[v0] Using fallback products - Shopify not configured")
-    return FALLBACK_PRODUCTS.slice(0, first)
-  }
-
   const graphqlQuery = `
     query GetProducts($first: Int!, $query: String) {
       products(first: $first, query: $query) {
@@ -492,6 +172,8 @@ export async function getProducts({ first = 20, query }: { first?: number; query
             title
             handle
             description
+            productType
+            tags
             priceRange {
               minVariantPrice {
                 amount
@@ -521,6 +203,7 @@ export async function getProducts({ first = 20, query }: { first?: number; query
   `
 
   try {
+    console.log(`[v0] Fetching ${first} products${query ? ` with query: ${query}` : ""}`)
     const data = await shopifyFetch<{
       products: {
         edges: Array<{
@@ -529,6 +212,8 @@ export async function getProducts({ first = 20, query }: { first?: number; query
             title: string
             handle: string
             description: string
+            productType: string
+            tags: string[]
             priceRange: {
               minVariantPrice: {
                 amount: string
@@ -556,133 +241,39 @@ export async function getProducts({ first = 20, query }: { first?: number; query
       }
     }>({ query: graphqlQuery, variables: { first, query } })
 
-    return data.products.edges.map((edge) => edge.node)
+    const products = data.products.edges.map((edge) => ({
+      id: edge.node.id,
+      title: edge.node.title,
+      handle: edge.node.handle,
+      description: edge.node.description,
+      productType: edge.node.productType,
+      tags: edge.node.tags,
+      priceRange: edge.node.priceRange,
+      images: edge.node.images.edges.map(imgEdge => imgEdge.node),
+      variants: edge.node.variants.edges.map(varEdge => varEdge.node)
+    }))
+    
+    console.log(`[v0] Found ${products.length} products`)
+    if (query?.includes('tag:')) {
+    console.log('[v0] Products with requested tags:', products.map(p => ({ title: p.title, tags: p.tags })))
+    }
+    
+    return products
   } catch (error) {
     console.error("[v0] Error fetching products:", error)
-    return FALLBACK_PRODUCTS.slice(0, first)
+    return []
   }
 }
 
-export async function getCollection(handle: string) {
-  if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
-    console.log("[v0] Using fallback collection - Shopify not configured")
-    const collection = FALLBACK_COLLECTIONS.find((c) => c.handle === handle)
-    if (collection) {
-      return {
-        ...collection,
-        products: FALLBACK_PRODUCTS,
-      }
-    }
-    return null
-  }
+// Helper to extract Shopify product ID from global ID
+export function getShopifyProductId(globalId: string): string {
+  return globalId.split("/").pop() || ""
+}
 
-  const query = `
-    query GetCollection($handle: String!) {
-      collection(handle: $handle) {
-        id
-        title
-        handle
-        description
-        image {
-          url
-          altText
-        }
-        products(first: 50) {
-          edges {
-            node {
-              id
-              title
-              handle
-              description
-              priceRange {
-                minVariantPrice {
-                  amount
-                  currencyCode
-                }
-              }
-              images(first: 1) {
-                edges {
-                  node {
-                    url
-                    altText
-                  }
-                }
-              }
-              variants(first: 1) {
-                edges {
-                  node {
-                    id
-                    availableForSale
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `
-
-  try {
-    const data = await shopifyFetch<{
-      collection: {
-        id: string
-        title: string
-        handle: string
-        description: string
-        image: { url: string; altText: string } | null
-        products: {
-          edges: Array<{
-            node: {
-              id: string
-              title: string
-              handle: string
-              description: string
-              priceRange: {
-                minVariantPrice: {
-                  amount: string
-                  currencyCode: string
-                }
-              }
-              images: {
-                edges: Array<{
-                  node: {
-                    url: string
-                    altText: string
-                  }
-                }>
-              }
-              variants: {
-                edges: Array<{
-                  node: {
-                    id: string
-                    availableForSale: boolean
-                  }
-                }>
-              }
-            }
-          }>
-        }
-      }
-    }>({ query, variables: { handle } })
-
-    if (!data.collection) {
-      return null
-    }
-
-    return {
-      ...data.collection,
-      products: data.collection.products.edges.map((edge) => edge.node),
-    }
-  } catch (error) {
-    console.error("[v0] Error fetching collection:", error)
-    const collection = FALLBACK_COLLECTIONS.find((c) => c.handle === handle)
-    if (collection) {
-      return {
-        ...collection,
-        products: FALLBACK_PRODUCTS,
-      }
-    }
-    return null
-  }
+// Format price
+export function formatPrice(amount: string, currencyCode: string): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currencyCode,
+  }).format(Number.parseFloat(amount))
 }

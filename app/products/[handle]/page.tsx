@@ -1,37 +1,43 @@
-import { notFound } from "next/navigation";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { ProductDetails } from "@/components/product-details";
-import { getProduct } from "@/lib/shopify";
+import { notFound } from 'next/navigation'
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { ProductDetails } from "@/components/product-details"
+import { getProduct } from "@/lib/shopify"
+import { Breadcrumb } from "@/components/breadcrumb"
 
 export async function generateMetadata({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string }>
 }) {
-  const product = await getProduct(params.handle);
+  const { handle } = await params
+  const product = await getProduct(handle)
 
   if (!product) {
     return {
       title: "Product Not Found",
-    };
+    }
   }
 
   return {
-    title: `${product.title} | flawless_strands`,
+    title: `${product.title} | Flawless Strands`,
     description: product.description || `Shop ${product.title}`,
-  };
+  }
 }
 
 export default async function ProductPage({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string }>
 }) {
-  const product = await getProduct(params.handle);
+  const { handle } = await params
+  console.log("[v0] Product page loading for handle:", handle)
+  const product = await getProduct(handle)
+  console.log("[v0] Product found:", product ? product.title : "null")
 
   if (!product) {
-    notFound();
+    console.log("[v0] Product not found, returning 404 for handle:", handle)
+    notFound()
   }
 
   return (
@@ -39,12 +45,13 @@ export default async function ProductPage({
       <SiteHeader />
 
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-8 md:py-12">
+          <Breadcrumb />
           <ProductDetails product={product} />
         </div>
       </main>
 
       <SiteFooter />
     </div>
-  );
+  )
 }

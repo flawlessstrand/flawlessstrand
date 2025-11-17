@@ -109,9 +109,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
         {/* Product Description */}
         {product.description && (
-          <div className="prose prose-sm max-w-none">
-            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
-          </div>
+<div
+  className="prose prose-sm max-w-none"
+  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+/>
+
         )}
 
         {/* Variant Options */}
