@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <h3 className="font-medium text-xs md:text-sm hover:underline line-clamp-2">{product.title}</h3>
           </Link>
           <p className="text-sm md:text-lg font-semibold">
-            ${Number.parseFloat(price.amount).toFixed(2)} {price.currencyCode}
+            £{Number.parseFloat(price.amount).toFixed(2)} {price.currencyCode}
           </p>
           <Button className="w-full bg-transparent text-xs md:text-sm" size="sm" variant="outline" asChild>
             <Link href={`/products/${product.handle}`}>View Details</Link>

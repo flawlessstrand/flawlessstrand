@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 const slides = [
   {
     id: 1,
-    image: "/heroslide1.jpg",
+    image: "/heroslide6.jpg",
     alt: "Beautiful model with luxury straight hair wig",
   },
   {
@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 5,
-    image: "/heroslide6.jpg",
+    image: "/heroslide1.jpg",
     alt: "Gorgeous model with curly hair extensions",
   },
 ]

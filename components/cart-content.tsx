@@ -94,7 +94,7 @@ export function CartContent({ cart }: CartContentProps) {
                   </Link>
                   <p className="text-sm text-muted-foreground">{line.merchandise.title}</p>
                   <p className="text-lg font-semibold mt-2">
-                    ${Number.parseFloat(line.merchandise.priceV2.amount).toFixed(2)}{" "}
+                    £{Number.parseFloat(line.merchandise.priceV2.amount).toFixed(2)}{" "}
                     {line.merchandise.priceV2.currencyCode}
                   </p>
                 </div>

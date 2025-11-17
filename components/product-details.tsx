@@ -27,6 +27,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     setIsAdding(true)
     try {
       await addToCart(selectedVariant.id, 1)
+      window.dispatchEvent(new Event("cartUpdated"))
+
       // Redirect to cart or show success message
       router.push("/cart")
     } catch (error) {
@@ -97,11 +99,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-balance">{product.title}</h1>
           <div className="flex items-baseline gap-3">
             <span className="text-2xl font-bold">
-              ${Number.parseFloat(price.amount).toFixed(2)} {price.currencyCode}
+              £{Number.parseFloat(price.amount).toFixed(2)} {price.currencyCode}
             </span>
             {compareAtPrice && Number.parseFloat(compareAtPrice.amount) > Number.parseFloat(price.amount) && (
               <span className="text-lg text-muted-foreground line-through">
-                ${Number.parseFloat(compareAtPrice.amount).toFixed(2)}
+                £{Number.parseFloat(compareAtPrice.amount).toFixed(2)}
               </span>
             )}
           </div>
@@ -204,14 +206,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         {/* Product Features */}
         <Card className="p-6 bg-muted/30 border-none">
           <ul className="space-y-3 text-sm">
-            <li className="flex items-start gap-2">
-              <Check className="h-5 w-5 text-[#2a1a1f] flex-shrink-0 mt-0.5" />
-              <span>100% virgin human hair</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Check className="h-5 w-5 text-[#2a1a1f] flex-shrink-0 mt-0.5" />
-              <span>Free worldwide shipping</span>
-            </li>
             <li className="flex items-start gap-2">
               <Check className="h-5 w-5 text-[#2a1a1f] flex-shrink-0 mt-0.5" />
               <span>30-day return policy</span>
