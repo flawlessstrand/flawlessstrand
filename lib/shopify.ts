@@ -34,12 +34,35 @@ export async function getProduct(handle: string) {
             }
           }
         }
+        media(first: 10) {
+          edges {
+            node {
+              ... on MediaImage {
+                id
+                image {
+                  url
+                  altText
+                }
+                mediaContentType
+              }
+              ... on Video {
+                id
+                sources {
+                  url
+                  mimeType
+                }
+                mediaContentType
+              }
+            }
+          }
+        }
         variants(first: 50) {
           edges {
             node {
               id
               title
               availableForSale
+              quantityAvailable
               priceV2 {
                 amount
                 currencyCode
@@ -92,12 +115,29 @@ export async function getProduct(handle: string) {
             }
           }>
         }
+        media: {
+          edges: Array<{
+            node: {
+              id: string
+              mediaContentType: string
+              image?: {
+                url: string
+                altText: string
+              }
+              sources?: Array<{
+                url: string
+                mimeType: string
+              }>
+            }
+          }>
+        }
         variants: {
           edges: Array<{
             node: {
               id: string
               title: string
               availableForSale: boolean
+              quantityAvailable?: number
               priceV2: {
                 amount: string
                 currencyCode: string
@@ -130,8 +170,23 @@ export async function getProduct(handle: string) {
     }
 
     console.log("[v0] Product found:", data.product.title)
-    console.log("[v0] Product images count:", data.product.images.edges.length)
+    console.log("[v0] Product media count:", data.product.media.edges.length)
     console.log("[v0] Product variants count:", data.product.variants.edges.length)
+    
+    const media = data.product.media.edges.map(edge => {
+      if (edge.node.mediaContentType === 'VIDEO' && edge.node.sources) {
+        return {
+          type: 'video' as const,
+          url: edge.node.sources[0]?.url || '',
+          mimeType: edge.node.sources[0]?.mimeType || 'video/mp4'
+        }
+      }
+      return {
+        type: 'image' as const,
+        url: edge.node.image?.url || '',
+        altText: edge.node.image?.altText || null
+      }
+    })
     
     // Transform the data to match component expectations
     return {
@@ -144,10 +199,12 @@ export async function getProduct(handle: string) {
       tags: data.product.tags,
       priceRange: data.product.priceRange,
       images: data.product.images.edges.map(edge => edge.node),
+      media, // Add media array with images and videos
       variants: data.product.variants.edges.map(edge => ({
         id: edge.node.id,
         title: edge.node.title,
         availableForSale: edge.node.availableForSale,
+        quantityAvailable: edge.node.quantityAvailable, // Add inventory quantity
         price: edge.node.priceV2,
         compareAtPrice: edge.node.compareAtPriceV2 || null,
         selectedOptions: edge.node.selectedOptions,

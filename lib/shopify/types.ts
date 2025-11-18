@@ -16,10 +16,17 @@ export interface Product {
     url: string
     altText: string | null
   }>
+  media?: Array<{
+    type: 'image' | 'video'
+    url: string
+    altText?: string | null
+    mimeType?: string
+  }>
   variants?: Array<{
     id: string
     title?: string
     availableForSale: boolean
+    quantityAvailable?: number
     price?: {
       amount: string
       currencyCode: string

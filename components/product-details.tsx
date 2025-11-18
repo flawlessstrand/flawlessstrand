@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ShoppingBag, Check } from "lucide-react"
+import { ShoppingBag, Check, AlertTriangle } from 'lucide-react'
 import type { Product } from "@/lib/shopify/types"
 import { addToCart } from "@/lib/shopify/cart"
 import { useRouter } from "next/navigation"
@@ -17,6 +17,8 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
   const router = useRouter()
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+  const mediaItems = product.media && product.media.length > 0 ? product.media : product.images.map(img => ({ type: 'image' as const, url: img.url, altText: img.altText }))
+  const [selectedMedia, setSelectedMedia] = useState(mediaItems[0])
   const [selectedImage, setSelectedImage] = useState(product.images[0])
   const [isAdding, setIsAdding] = useState(false)
   const [quantity, setQuantity] = useState(1)
@@ -52,7 +54,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       setSelectedVariant(newVariant)
       // Update image if variant has one
       if (newVariant.image) {
-        setSelectedImage(newVariant.image)
+        setSelectedMedia({ type: 'image', url: newVariant.image.url, altText: newVariant.image.altText })
       }
     }
   }
@@ -65,42 +67,71 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     ? Math.round(((Number.parseFloat(compareAtPrice.amount) - Number.parseFloat(price.amount)) / Number.parseFloat(compareAtPrice.amount)) * 100)
     : 0
 
+    
+  const quantityAvailable = selectedVariant.quantityAvailable ?? 999
+  const isLowStock = quantityAvailable > 0 && quantityAvailable < 5
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      {/* Product Images */}
+      {/* Product Images/Videos */}
       <div className="space-y-4">
-        {/* Main Image */}
+        {/* Main Media */}
         <div className="aspect-square relative overflow-hidden rounded-lg bg-muted">
-          <img
-            src={selectedImage?.url || "/placeholder.svg?height=600&width=600"}
-            alt={selectedImage?.altText || product.title}
-            className="w-full h-full object-cover"
-          />
+          {selectedMedia.type === 'video' ? (
+            <video
+              src={selectedMedia.url}
+              controls
+              className="w-full h-full object-cover"
+            >
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img
+              src={selectedMedia.url || "/placeholder.svg?height=600&width=600"}
+              alt={selectedMedia.altText || product.title}
+              className="w-full h-full object-cover"
+            />
+          )}
         </div>
 
-        {/* Thumbnail Images */}
-        {product.images.length > 1 && (
+        {/* Thumbnail Images/Videos */}
+        {mediaItems.length > 1 && (
           <div className="grid grid-cols-4 gap-4">
-            {product.images.map((image, index) => (
+            {mediaItems.map((media, index) => (
               <button
                 key={index}
-                onClick={() => setSelectedImage(image)}
+                onClick={() => setSelectedMedia(media)}
                 className={`aspect-square relative overflow-hidden rounded-lg border-2 transition-colors ${
-                  selectedImage?.url === image.url
+                  selectedMedia.url === media.url
                     ? "border-[#2a1a1f]"
                     : "border-transparent hover:border-muted-foreground/50"
                 }`}
               >
-                <img
-                  src={image.url || "/placeholder.svg"}
-                  alt={image.altText || `${product.title} ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                {media.type === 'video' ? (
+                  <div className="relative w-full h-full bg-black/80 flex items-center justify-center">
+                    <video
+                      src={media.url}
+                      className="w-full h-full object-cover opacity-60"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center">
+                        <div className="w-0 h-0 border-t-4 border-t-transparent border-l-6 border-l-black border-b-4 border-b-transparent ml-1"></div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={media.url || "/placeholder.svg"}
+                    alt={media.altText || `${product.title} ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </button>
             ))}
           </div>
         )}
       </div>
+
 
       {/* Product Info */}
       <div className="space-y-6">
@@ -194,11 +225,19 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         ))}
 
         {/* Availability */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {selectedVariant.availableForSale ? (
             <>
-              <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span className="text-sm text-muted-foreground">In Stock</span>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500" />
+                <span className="text-sm text-muted-foreground">In Stock</span>
+              </div>
+              {isLowStock && (
+                <Badge variant="outline" className="border-orange-500 text-orange-700 bg-orange-50">
+                  <AlertTriangle className="h-3 w-3 mr-1" />
+                  Only {quantityAvailable} left!
+                </Badge>
+              )}
             </>
           ) : (
             <>
@@ -207,7 +246,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             </>
           )}
         </div>
-
         
         {/* Quantity Selector */}
         <div className="space-y-3">
