@@ -148,7 +148,7 @@ export function CartContent({ cart }: CartContentProps) {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Shipping</span>
-                <span className="text-green-600">FREE</span>
+                <span className="text-green-600">shipping calculated at checkout</span>
               </div>
               <div className="border-t pt-2 mt-2">
                 <div className="flex justify-between font-semibold text-lg">

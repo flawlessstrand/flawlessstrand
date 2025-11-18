@@ -5,6 +5,8 @@ import { Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { CartIcon } from "@/components/cart-icon"
+import { AnnouncementBar } from "@/components/announcement-bar"
+
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -33,6 +35,8 @@ export function SiteHeader() {
   }, [])
 
   return (
+      <>
+      <AnnouncementBar />
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
@@ -115,5 +119,7 @@ export function SiteHeader() {
         </div>
       )}
     </header>
+        </>
+
   )
 }
