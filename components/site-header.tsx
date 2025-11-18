@@ -36,9 +36,14 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-serif font-bold text-foreground">LuxeHair</span>
-        </Link>
+<Link href="/" className="flex items-center space-x-2">
+  <img
+    src="/header.png"    // replace with your actual logo path
+    alt="flawless logo"
+    className="h-20 w-auto"
+  />
+</Link>
+
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">

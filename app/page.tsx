@@ -135,11 +135,22 @@ export default async function HomePage() {
             <div className="bg-[#fee1e3] p-6 md:p-8 lg:p-10 flex items-center">
               <div className="space-y-4 max-w-xl">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-balance">
-                  Get your Hair
+                  Flawless Starts Here
                 </h2>
                 <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
-                  Your perfect hair awaits! Explore our range of soft, lightweight, and tangle-free braiding extensions designed to bring bounce, shine, and effortless style to every look. Whether you’re creating everyday braids, bold protective styles, or statement twists, our collection makes styling simple, fun, and flawless. Find the hair that inspires your confidence and completes your signature style.
-                  States.
+Welcome to Flawless Strands 💖 – where your braid dreams come to life! Our extensions are soft, bouncy, and effortless, making every style feel flawless.
+
+Need some braid inspo?  Head over to our  <a
+  href="https://www.instagram.com/_flawless_strands?igsh=YXA0bzEya2lsMGVy&utm_source=qr"
+    target="_blank"
+  rel="noopener noreferrer"
+  className="font-semibold text-[#b96f82] underline underline-offset-2 hover:text-[#a86174]"
+>
+  Instagram
+</a>
+  for endless ideas, tips, and real-life looks from our amazing community. From everyday chic to bold statement styles, we’ve got your next hair obsession covered.
+
+Because life’s too short for boring hair – let’s make every braid a masterpiece! 🌸
                 </p>
                 <Button
                   size="lg"

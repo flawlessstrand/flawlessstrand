@@ -40,7 +40,8 @@ export default function ShippingPage() {
                 <div className="mx-auto w-12 h-12 rounded-full bg-[#fee1e3] flex items-center justify-center">
                   <Truck className="h-6 w-6 text-[#2a1a1f]" />
                 </div>
-                <h3 className="font-semibold">Free Shipping</h3>
+                <h3 className="font-semibold">Fast shipping 
+Shipping costs calculated at checkout</h3>
                 <p className="text-sm text-muted-foreground">
                   On all orders, no minimum
                 </p>
@@ -77,7 +78,7 @@ export default function ShippingPage() {
                 Shipping Rates & Delivery Estimates
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                We offer FREE worldwide shipping on all orders. Delivery times
+                We ship to all location. Delivery times
                 vary by location:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">

@@ -8,13 +8,13 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Luxury Human Hair Vendor UK | 100% Virgin Hair Extensions & Wigs",
-    template: "%s | Luxury Hair Vendor UK"
+    default: "Luxury braiding hair extension uk | 100% braiding Hair Extensions & Wigs",
+    template: "%s | Luxury braiding hair extension uk"
   },
   description:
     "Buy premium 100% virgin human hair bundles, lace wigs, and frontals from the UK's trusted hair vendor. Fast shipping across the UK, quality guaranteed.",
   keywords: [
-    "hair vendor UK",
+    "Luxury braiding hair extension uk",
     "human hair extensions",
     "lace wigs UK",
     "frontal wigs London",
@@ -24,26 +24,25 @@ export const metadata: Metadata = {
     "Brazilian hair UK",
     "UK hair store",
   ],
-  authors: [{ name: "Your Brand Name", url: "https://yourdomain.co.uk" }],
-  creator: "Your Brand Name",
-  publisher: "Your Brand Name",
-  generator: "Next.js + v0.app",
-  metadataBase: new URL("https://yourdomain.co.uk"),
+  authors: [{ name: "Flawless strand", url: "https://www.flawlessstrand.com/" }],
+  creator: "Flawless strand",
+  publisher: "Flawless strand",
+  metadataBase: new URL("https://www.flawlessstrand.com"),
   alternates: {
-    canonical: "https://yourdomain.co.uk",
+    canonical: "https://www.flawlessstrand.com",
   },
   openGraph: {
-    title: "Luxury Human Hair Vendor UK | Virgin Hair & Lace Wigs",
+    title: "Luxury braiding hair extension uk | 100% braiding Hair Extensions & Wigs",
     description:
       "Shop premium quality human hair extensions and wigs from the UK's trusted hair supplier. Natural look, soft feel, and long-lasting shine.",
-    url: "https://yourdomain.co.uk",
-    siteName: "Your Brand Name",
+    url: "https://www.flawlessstrand.com",
+    siteName: "Flawless strand",
     images: [
       {
         url: "/header.png",
         width: 1200,
         height: 630,
-        alt: "Luxury Human Hair Vendor UK",
+        alt: "Luxury braiding hair extension uk",
       },
     ],
     locale: "en_GB",
@@ -51,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luxury Human Hair Vendor UK | 100% Virgin Hair Extensions",
+    title: "Luxury braiding hair extension uk | 100% braiding Hair Extensions",
     description:
-      "Trusted UK hair vendor offering virgin human hair bundles, wigs, and HD frontals. Fast shipping, amazing quality.",
+      "Trusted UK hair vendor offering braiding hair bundles, wigs, and HD frontals. Fast shipping, amazing quality.",
     images: ["/headerblack.png"],
     creator: "flawlessstrand",
   },
@@ -64,7 +63,7 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/headerblack.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
@@ -97,10 +96,10 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Store",
               name: "flawlessstrand",
-              image: "https://yourdomain.co.uk/og-image.jpg",
-              "@id": "https://yourdomain.co.uk",
-              url: "https://yourdomain.co.uk",
-              telephone: "+4407594166687",
+              image: "https://www.flawlessstrand.com/header.png",
+              "@id": "https://www.flawlessstrand.com",
+              url: "",
+              telephone: "+447594166687",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "78 Brunswick court",

@@ -46,7 +46,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="font-semibold">Call Us</h3>
                 <p className="text-sm text-muted-foreground">
-                  +44 07594166687
+                  +44 7594166687
                 </p>
               </CardContent>
             </Card>

@@ -158,7 +158,7 @@ export function CartContent({ cart }: CartContentProps) {
                 <span className="text-green-600">✓</span> Free worldwide shipping
               </p>
               <p className="flex items-center gap-2">
-                <span className="text-green-600">✓</span> 30-day return policy
+                <span className="text-green-600">✓</span> 14-day return policy
               </p>
             </div>
           </CardContent>

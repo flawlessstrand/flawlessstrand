@@ -208,7 +208,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2">
               <Check className="h-5 w-5 text-[#2a1a1f] flex-shrink-0 mt-0.5" />
-              <span>30-day return policy</span>
+              <span>14-day return policy</span>
             </li>
             <li className="flex items-start gap-2">
               <Check className="h-5 w-5 text-[#2a1a1f] flex-shrink-0 mt-0.5" />
