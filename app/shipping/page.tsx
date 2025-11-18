@@ -40,10 +40,9 @@ export default function ShippingPage() {
                 <div className="mx-auto w-12 h-12 rounded-full bg-[#fee1e3] flex items-center justify-center">
                   <Truck className="h-6 w-6 text-[#2a1a1f]" />
                 </div>
-                <h3 className="font-semibold">Fast shipping 
-Shipping costs calculated at checkout</h3>
+                <h3 className="font-semibold">Free shipping </h3>
                 <p className="text-sm text-muted-foreground">
-                  On all orders, no minimum
+                  On orders over £50
                 </p>
               </CardContent>
             </Card>

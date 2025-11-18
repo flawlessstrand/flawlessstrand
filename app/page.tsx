@@ -7,9 +7,20 @@ import {  getProducts } from "@/lib/shopify";
 import { ProductCard } from "@/components/product-card";
 import { HeroSlider } from "@/components/hero-slider"
 
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
 
 export default async function HomePage() {
-  const products = await getProducts({ first: 8, query: 'tag:featured' })
+  const featuredProducts = await getProducts({ first: 8, query: 'tag:featured' })
+  const randomizedFeatured = shuffleArray(featuredProducts)
+
   const allProducts = await getProducts({ first: 8 })
 
   return (
@@ -235,9 +246,8 @@ Each piece is designed to complement your unique style and let your confidence s
                 meets timeless elegance.
               </p>
             </div>
-
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-              {products.map((product) => (
+              {randomizedFeatured.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
