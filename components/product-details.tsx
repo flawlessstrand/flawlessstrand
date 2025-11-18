@@ -7,6 +7,8 @@ import { ShoppingBag, Check } from "lucide-react"
 import type { Product } from "@/lib/shopify/types"
 import { addToCart } from "@/lib/shopify/cart"
 import { useRouter } from "next/navigation"
+import { Badge } from "@/components/ui/badge"
+
 
 interface ProductDetailsProps {
   product: Product
@@ -55,6 +57,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
   const price = selectedVariant.price
   const compareAtPrice = selectedVariant.compareAtPrice
+    
+  const hasDiscount = compareAtPrice && Number.parseFloat(compareAtPrice.amount) > Number.parseFloat(price.amount)
+  const discountPercentage = hasDiscount 
+    ? Math.round(((Number.parseFloat(compareAtPrice.amount) - Number.parseFloat(price.amount)) / Number.parseFloat(compareAtPrice.amount)) * 100)
+    : 0
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -97,14 +104,21 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="space-y-6">
         <div className="space-y-2">
           <h1 className="text-3xl md:text-4xl font-serif font-bold text-balance">{product.title}</h1>
-          <div className="flex items-baseline gap-3">
-            <span className="text-2xl font-bold">
-              £{Number.parseFloat(price.amount).toFixed(2)} {price.currencyCode}
-            </span>
-            {compareAtPrice && Number.parseFloat(compareAtPrice.amount) > Number.parseFloat(price.amount) && (
-              <span className="text-lg text-muted-foreground line-through">
-                £{Number.parseFloat(compareAtPrice.amount).toFixed(2)}
+          <div className="flex items-center gap-3">
+            <div className="flex items-baseline gap-3">
+              <span className={`text-2xl font-bold ${hasDiscount ? 'text-red-600' : ''}`}>
+                £{Number.parseFloat(price.amount).toFixed(2)}
               </span>
+              {hasDiscount && (
+                <span className="text-lg text-muted-foreground line-through">
+                  £{Number.parseFloat(compareAtPrice.amount).toFixed(2)}
+                </span>
+              )}
+            </div>
+            {hasDiscount && (
+              <Badge className="bg-red-600 hover:bg-red-700 text-white font-semibold">
+                SAVE {discountPercentage}%
+              </Badge>
             )}
           </div>
         </div>

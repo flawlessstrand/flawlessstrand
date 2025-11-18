@@ -193,6 +193,14 @@ export async function getProducts({ first = 20, query }: { first?: number; query
                 node {
                   id
                   availableForSale
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                  compareAtPriceV2 {
+                    amount
+                    currencyCode
+                  }
                 }
               }
             }
@@ -233,6 +241,14 @@ export async function getProducts({ first = 20, query }: { first?: number; query
                 node: {
                   id: string
                   availableForSale: boolean
+                  priceV2: {
+                    amount: string
+                    currencyCode: string
+                  }
+                  compareAtPriceV2?: {
+                    amount: string
+                    currencyCode: string
+                  }
                 }
               }>
             }
@@ -250,12 +266,17 @@ export async function getProducts({ first = 20, query }: { first?: number; query
       tags: edge.node.tags,
       priceRange: edge.node.priceRange,
       images: edge.node.images.edges.map(imgEdge => imgEdge.node),
-      variants: edge.node.variants.edges.map(varEdge => varEdge.node)
+      variants: edge.node.variants.edges.map(varEdge => ({
+        id: varEdge.node.id,
+        availableForSale: varEdge.node.availableForSale,
+        price: varEdge.node.priceV2,
+        compareAtPrice: varEdge.node.compareAtPriceV2 || null
+      }))
     }))
     
     console.log(`[v0] Found ${products.length} products`)
     if (query?.includes('tag:')) {
-    console.log('[v0] Products with requested tags:', products.map(p => ({ title: p.title, tags: p.tags })))
+      console.log('[v0] Products with requested tags:', products.map(p => ({ title: p.title, tags: p.tags })))
     }
     
     return products
