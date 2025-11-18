@@ -3,8 +3,10 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Trash2, ShoppingBag } from "lucide-react"
+import { Trash2, ShoppingBag } from 'lucide-react'
 import { useState } from "react"
+import { removeFromCart } from "@/lib/shopify/cart"
+import { useRouter } from 'next/navigation'
 
 interface CartLine {
   id: string
@@ -54,6 +56,19 @@ interface CartContentProps {
 
 export function CartContent({ cart }: CartContentProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+
+  const handleRemove = async (lineId: string) => {
+    setIsLoading(true)
+    try {
+      await removeFromCart(lineId)
+      router.refresh()
+    } catch (error) {
+      console.error("[v0] Error removing item from cart:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   if (!cart || cart.lines.edges.length === 0) {
     return (
@@ -94,14 +109,19 @@ export function CartContent({ cart }: CartContentProps) {
                   </Link>
                   <p className="text-sm text-muted-foreground">{line.merchandise.title}</p>
                   <p className="text-lg font-semibold mt-2">
-                    £{Number.parseFloat(line.merchandise.priceV2.amount).toFixed(2)}{" "}
-                    {line.merchandise.priceV2.currencyCode}
+                    £{Number.parseFloat(line.merchandise.priceV2.amount).toFixed(2)}
                   </p>
                 </div>
 
                 {/* Quantity & Remove */}
                 <div className="flex flex-col items-end justify-between">
-                  <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="text-muted-foreground hover:text-destructive"
+                    onClick={() => handleRemove(line.id)}
+                    disabled={isLoading}
+                  >
                     <Trash2 className="h-4 w-4" />
                     <span className="sr-only">Remove item</span>
                   </Button>
@@ -123,8 +143,7 @@ export function CartContent({ cart }: CartContentProps) {
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
                 <span>
-                  ${Number.parseFloat(cart.cost.subtotalAmount.amount).toFixed(2)}{" "}
-                  {cart.cost.subtotalAmount.currencyCode}
+                  £{Number.parseFloat(cart.cost.subtotalAmount.amount).toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
@@ -135,7 +154,7 @@ export function CartContent({ cart }: CartContentProps) {
                 <div className="flex justify-between font-semibold text-lg">
                   <span>Total</span>
                   <span>
-                    ${Number.parseFloat(cart.cost.totalAmount.amount).toFixed(2)} {cart.cost.totalAmount.currencyCode}
+                    £{Number.parseFloat(cart.cost.totalAmount.amount).toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -155,7 +174,7 @@ export function CartContent({ cart }: CartContentProps) {
                 <span className="text-green-600">✓</span> Secure checkout
               </p>
               <p className="flex items-center gap-2">
-                <span className="text-green-600">✓</span> Free worldwide shipping
+                <span className="text-green-600">✓</span> shipping calculated at checkout
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-green-600">✓</span> 14-day return policy

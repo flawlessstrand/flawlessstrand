@@ -148,6 +148,54 @@ const GET_CART_QUERY = `
   }
 `
 
+const REMOVE_FROM_CART_MUTATION = `
+  mutation removeFromCart($cartId: ID!, $lineIds: [ID!]!) {
+    cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+      cart {
+        id
+        checkoutUrl
+        lines(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                  product {
+                    id
+                    title
+                    handle
+                    featuredImage {
+                      url
+                      altText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+`
+
 export async function addToCart(variantId: string, quantity: number) {
   const cookieStore = await cookies()
   let cartId = cookieStore.get(CART_COOKIE)?.value
@@ -200,4 +248,20 @@ export async function getCart() {
   })
 
   return response.cart
+}
+
+export async function removeFromCart(lineId: string) {
+  const cookieStore = await cookies()
+  const cartId = cookieStore.get(CART_COOKIE)?.value
+
+  if (!cartId) {
+    return null
+  }
+
+  const response = await shopifyFetch({
+    query: REMOVE_FROM_CART_MUTATION,
+    variables: { cartId, lineIds: [lineId] },
+  })
+
+  return response.cartLinesRemove.cart
 }
