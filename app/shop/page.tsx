@@ -19,7 +19,7 @@ export default async function ShopPage({
   const query = typeof searchParams.q === "string" ? searchParams.q : undefined;
 
   // Fetch products from Shopify
-  const products = await getProducts({ first: 20, query });
+  const products = await getProducts({ first: 100, query });
 
   return (
     <div className="flex min-h-screen flex-col">
