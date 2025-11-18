@@ -3,9 +3,9 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Trash2, ShoppingBag } from 'lucide-react'
+import { Trash2, ShoppingBag, Plus, Minus } from 'lucide-react'
 import { useState } from "react"
-import { removeFromCart } from "@/lib/shopify/cart"
+import { removeFromCart, updateCartQuantity } from "@/lib/shopify/cart"
 import { useRouter } from 'next/navigation'
 
 interface CartLine {
@@ -56,6 +56,7 @@ interface CartContentProps {
 
 export function CartContent({ cart }: CartContentProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [updatingLineId, setUpdatingLineId] = useState<string | null>(null)
   const router = useRouter()
 
   const handleRemove = async (lineId: string) => {
@@ -67,6 +68,20 @@ export function CartContent({ cart }: CartContentProps) {
       console.error("[v0] Error removing item from cart:", error)
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleQuantityChange = async (lineId: string, newQuantity: number) => {
+    if (newQuantity < 1) return
+    
+    setUpdatingLineId(lineId)
+    try {
+      await updateCartQuantity(lineId, newQuantity)
+      router.refresh()
+    } catch (error) {
+      console.error("[v0] Error updating quantity:", error)
+    } finally {
+      setUpdatingLineId(null)
     }
   }
 
@@ -120,12 +135,35 @@ export function CartContent({ cart }: CartContentProps) {
                     size="icon" 
                     className="text-muted-foreground hover:text-destructive"
                     onClick={() => handleRemove(line.id)}
-                    disabled={isLoading}
+                    disabled={isLoading || updatingLineId === line.id}
                   >
                     <Trash2 className="h-4 w-4" />
                     <span className="sr-only">Remove item</span>
                   </Button>
-                  <div className="text-sm text-muted-foreground">Qty: {line.quantity}</div>
+                  
+                  <div className="flex items-center gap-2 border rounded-md">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => handleQuantityChange(line.id, line.quantity - 1)}
+                      disabled={line.quantity <= 1 || updatingLineId === line.id}
+                    >
+                      <Minus className="h-3 w-3" />
+                    </Button>
+                    <span className="w-8 text-center text-sm font-medium">
+                      {updatingLineId === line.id ? "..." : line.quantity}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => handleQuantityChange(line.id, line.quantity + 1)}
+                      disabled={updatingLineId === line.id}
+                    >
+                      <Plus className="h-3 w-3" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </CardContent>

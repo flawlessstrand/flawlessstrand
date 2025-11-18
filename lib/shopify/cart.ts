@@ -196,6 +196,54 @@ const REMOVE_FROM_CART_MUTATION = `
   }
 `
 
+const UPDATE_CART_MUTATION = `
+  mutation updateCart($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+    cartLinesUpdate(cartId: $cartId, lines: $lines) {
+      cart {
+        id
+        checkoutUrl
+        lines(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                  product {
+                    id
+                    title
+                    handle
+                    featuredImage {
+                      url
+                      altText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+          subtotalAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+  }
+`
+
 export async function addToCart(variantId: string, quantity: number) {
   const cookieStore = await cookies()
   let cartId = cookieStore.get(CART_COOKIE)?.value
@@ -264,4 +312,23 @@ export async function removeFromCart(lineId: string) {
   })
 
   return response.cartLinesRemove.cart
+}
+
+export async function updateCartQuantity(lineId: string, quantity: number) {
+  const cookieStore = await cookies()
+  const cartId = cookieStore.get(CART_COOKIE)?.value
+
+  if (!cartId) {
+    return null
+  }
+
+  const response = await shopifyFetch({
+    query: UPDATE_CART_MUTATION,
+    variables: { 
+      cartId, 
+      lines: [{ id: lineId, quantity }] 
+    },
+  })
+
+  return response.cartLinesUpdate.cart
 }

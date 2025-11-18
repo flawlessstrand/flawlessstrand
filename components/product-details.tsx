@@ -19,6 +19,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
   const [selectedImage, setSelectedImage] = useState(product.images[0])
   const [isAdding, setIsAdding] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+
 
   // Group variants by option (e.g., Color, Size)
   const options = product.options.filter((option) => option.values.length > 1)
@@ -28,7 +30,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
     setIsAdding(true)
     try {
-      await addToCart(selectedVariant.id, 1)
+      await addToCart(selectedVariant.id, quantity)
       window.dispatchEvent(new Event("cartUpdated"))
 
       // Redirect to cart or show success message
@@ -204,6 +206,39 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               <span className="text-sm text-muted-foreground">Out of Stock</span>
             </>
           )}
+        </div>
+
+        
+        {/* Quantity Selector */}
+        <div className="space-y-3">
+          <label className="text-sm font-semibold">Quantity</label>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center border rounded-lg">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                disabled={quantity <= 1}
+                className="h-10 w-10 p-0"
+              >
+                -
+              </Button>
+              <div className="w-16 text-center font-semibold">
+                {quantity}
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setQuantity(quantity + 1)}
+                className="h-10 w-10 p-0"
+              >
+                +
+              </Button>
+            </div>
+            <span className="text-sm text-muted-foreground">
+              Total: £{(Number.parseFloat(price.amount) * quantity).toFixed(2)}
+            </span>
+          </div>
         </div>
 
         {/* Add to Cart */}
